@@ -7,12 +7,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 class LocationService extends GetxService {
 
   final Rx<Position?> _currentPosition = Rx<Position?>(null);
-
-
-
   final Rx<ConnectivityResult> _connectivityResult = Rx<ConnectivityResult>(ConnectivityResult.none);
-  bool get hasInternet => _connectivityResult.value != ConnectivityResult.none;
 
+  bool get hasInternet => _connectivityResult.value != ConnectivityResult.none;
 
   Rx<ConnectivityResult> get connectivityResultStream => _connectivityResult;
   Rx<Position?> get currentPositionStream => _currentPosition;
@@ -20,20 +17,14 @@ class LocationService extends GetxService {
   Position? get currentPosition => _currentPosition.value;
 
   late StreamSubscription<Position> _positionStreamSubscription;
-
-
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   @override
   void onInit() {
     super.onInit();
 
-
     _checkLocationPermissions();
-
-
     _startLocationStream();
-
 
     _startConnectivityStream();
   }
@@ -44,7 +35,6 @@ class LocationService extends GetxService {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-
       return Future.error('Location services are disabled.');
     }
 
@@ -73,9 +63,7 @@ class LocationService extends GetxService {
     });
   }
 
-
   void _startConnectivityStream() {
-
 
     Connectivity().checkConnectivity().then((List<ConnectivityResult> results) {
       if (results.isNotEmpty) {
@@ -90,7 +78,6 @@ class LocationService extends GetxService {
       }
     });
   }
-
 
   double getDistanceInMeters(double taskLat, double taskLon) {
     if (_currentPosition.value == null) return double.infinity;

@@ -7,6 +7,7 @@ import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 import '../../../data/models/task_model.dart';
 
+
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
@@ -22,10 +23,11 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: AppColors.primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
-        title:Text(
-          'Welcome,',
+
+        title: Obx(() => Text(
+          'Welcome, ${controller.userName.value}',
           style: const TextStyle(color: Colors.white, fontSize: 18),
-        ),
+        )),
         centerTitle: false,
         actions: [
           IconButton(
@@ -59,15 +61,27 @@ class HomeView extends GetView<HomeController> {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (controller.error.isNotEmpty) {
+        if (controller.error.isNotEmpty && controller.tasks.isEmpty) {
           return Center(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                'Error: ${controller.error.value}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.red, fontSize: 16),
-              ),
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.signal_cellular_off, color: Colors.grey, size: 50),
+                    const SizedBox(height: 10),
+                    Text(
+                      controller.error.value,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: Colors.grey, fontSize: 16),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: controller.fetchMyTasks,
+                      child: const Text('Try Refresh'),
+                    )
+                  ],
+                )
             ),
           );
         }
@@ -98,12 +112,14 @@ class HomeView extends GetView<HomeController> {
 
 
   Widget _buildTaskCard(Task task) {
+
     Color statusColor;
     final String status = task.taskStatus.toLowerCase();
 
     String statusText = status.capitalizeFirst ?? 'Unknown';
 
     final RxBool withinRange = controller.isWithinRange(task.id);
+
 
     switch (status) {
       case 'pending':
@@ -172,13 +188,13 @@ class HomeView extends GetView<HomeController> {
 
 
                 final isTaskCompleted = status == 'completed' || status == 'complete';
-                final isTaskInProgress = status == 'in_progress';
+                final isTaskInProgress = status == 'inprogress';
                 final isTaskPending = status == 'pending';
                 final isLocallyCheckedIn = controller.checkInStatus[task.id] ?? false;
                 final isWithinRange = withinRange.value;
 
 
-                print('--- UI DEBUG for Task ${task.id} ---');
+                print('--- UI DEBUG for Task name:${task.title} id: ${task.id} ---');
                 print('Status: ${task.taskStatus}');
                 print('isLocallyCheckedIn: $isLocallyCheckedIn');
                 print('isWithinRange: $isWithinRange');
