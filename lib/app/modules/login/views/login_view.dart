@@ -1,7 +1,6 @@
+import 'package:field_task_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../../core/utils/app_colors.dart';
 import '../controllers/login_controller.dart';
 
@@ -17,7 +16,7 @@ class LoginView extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // ১. লোগো/হেডার সেকশন
+
               Text(
                 'Welcome Back',
                 style: TextStyle(
@@ -31,12 +30,12 @@ class LoginView extends GetView<LoginController> {
                 'Sign in to continue to your account.',
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.textColor.withOpacity(0.6),
+                  color: AppColors.textColor.withValues(alpha: 0.6),
                 ),
               ),
               const SizedBox(height: 50),
 
-              // ২. লগইন ফর্ম কার্ড
+
               Card(
                 elevation: 10,
                 shape: RoundedRectangleBorder(
@@ -48,7 +47,7 @@ class LoginView extends GetView<LoginController> {
                     key: controller.formKey,
                     child: Column(
                       children: <Widget>[
-                        // --- ইমেল ফিল্ড ---
+
                         _buildInputField(
                           controller: controller.emailController,
                           label: 'Email Address',
@@ -62,7 +61,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 20),
 
-                        // --- পাসওয়ার্ড ফিল্ড ---
+
                         _buildInputField(
                           controller: controller.passwordController,
                           label: 'Password',
@@ -80,12 +79,12 @@ class LoginView extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 10),
 
-                        // --- Forgot Password ---
+
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
                             onPressed: () {
-                              // Forgot Password লজিক
+                              Get.toNamed(Routes.FORGET_PASSWORD);
                             },
                             child: Text(
                               'Forgot Password?',
@@ -95,13 +94,13 @@ class LoginView extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 30),
 
-                        // --- লগইন বাটন ---
+
                         SizedBox(
                           width: double.infinity,
                           height: 55,
                           child: ElevatedButton(
                             onPressed: (){
-                              //controller.handleLogin();
+                              controller.handleLogin();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryColor,
@@ -134,7 +133,7 @@ class LoginView extends GetView<LoginController> {
                   const Text("Don't have an account? ", style: TextStyle(color: AppColors.textColor)),
                   GestureDetector(
                     onTap: () {
-
+                      Get.toNamed(Routes.SIGNUP);
                     },
                     child: Text(
                       'Sign Up',
@@ -153,7 +152,7 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
-  // --- কাস্টম ইনপুট ফিল্ড উইজেট ---
+
   Widget _buildInputField({
     required TextEditingController controller,
     required String label,
@@ -174,7 +173,7 @@ class LoginView extends GetView<LoginController> {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(color: AppColors.primaryColor.withOpacity(0.5)),
+          borderSide: BorderSide(color: AppColors.primaryColor.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),

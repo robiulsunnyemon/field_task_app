@@ -1,3 +1,4 @@
+import 'package:field_task_app/app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/splash_controller.dart';
@@ -8,6 +9,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     Get.find<SplashController>();
     return const Scaffold(
+      backgroundColor: AppColors.primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
