@@ -1,4 +1,5 @@
 import 'package:field_task_app/app/core/utils/app_colors.dart';
+import 'package:field_task_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -55,7 +56,9 @@ class OnboardingView extends GetView<OnboardingController> {
                 text: 'Login as Field Agent',
                 icon: Icons.person_pin_circle,
                 color: AppColors.primaryColor,
-                onPressed:(){}
+                onPressed:(){
+                  Get.toNamed(Routes.LOGIN);
+                }
               ),
 
               const SizedBox(height: 20),
