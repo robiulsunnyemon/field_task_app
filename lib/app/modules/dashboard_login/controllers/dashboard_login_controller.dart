@@ -16,6 +16,7 @@ class DashboardLoginController extends GetxController {
   final String correctPassword = "123456";
 
   void login() {
+    print("called");
     final email = emailController.text.trim();
     final password = passwordController.text;
 
@@ -29,7 +30,7 @@ class DashboardLoginController extends GetxController {
       );
 
 
-      Get.offAllNamed(Routes.CREATE_TASK);
+      Get.offAllNamed(Routes.DASHBOARD);
 
     } else {
 

@@ -6,18 +6,13 @@ import '../../../data/models/task_model.dart';
 import '../../../data/models/user_model.dart';
 import '../controllers/create_task_controller.dart';
 
-class CreateTaskView extends GetView<CreateTaskController> {
+class CreateTaskView extends StatelessWidget {
   const CreateTaskView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CreateTaskController controller = Get.put(CreateTaskController());
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create New Task'),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

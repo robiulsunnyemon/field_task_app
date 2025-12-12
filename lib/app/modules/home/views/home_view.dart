@@ -122,7 +122,19 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(Routes.DASHBOARD_LOGIN);
+          Get.defaultDialog(
+            title: "Logout",
+            middleText: "Are you sure you want to log out and move Dashboard?",
+            textConfirm: "Yes",
+            textCancel: "No",
+            confirmTextColor: Colors.white,
+            onConfirm: () {
+              Get.back();
+              GetStorage().remove('authToken');
+              GetStorage().remove('currentUserData');
+              Get.offAllNamed(Routes.DASHBOARD_LOGIN);
+            },
+          );
         },
         backgroundColor: AppColors.secondaryColor,
         child: const Icon(Icons.swap_horiz,color: Colors.white,),

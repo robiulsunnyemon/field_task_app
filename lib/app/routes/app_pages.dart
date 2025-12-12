@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/create_task/bindings/create_task_binding.dart';
 import '../modules/create_task/views/create_task_view.dart';
+import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/dashboard_login/bindings/dashboard_login_binding.dart';
 import '../modules/dashboard_login/views/dashboard_login_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
@@ -85,6 +87,11 @@ class AppPages {
       name: _Paths.DASHBOARD_LOGIN,
       page: () => const DashboardLoginView(),
       binding: DashboardLoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => const DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }

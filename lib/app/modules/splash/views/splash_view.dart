@@ -9,7 +9,7 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     Get.find<SplashController>();
     return const Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      backgroundColor: AppColors.secondaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
