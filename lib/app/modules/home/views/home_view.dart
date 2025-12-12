@@ -375,7 +375,7 @@ class HomeView extends GetView<HomeController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 16, color: AppColors.textColor.withOpacity(0.7)),
+          Icon(icon, size: 16, color: AppColors.textColor.withValues(alpha: 0.7)),
           const SizedBox(width: 8),
           Text(
             label,
@@ -385,7 +385,7 @@ class HomeView extends GetView<HomeController> {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: AppColors.textColor.withOpacity(0.8)),
+              style: TextStyle(color: AppColors.textColor.withValues(alpha: 0.8)),
               overflow: TextOverflow.ellipsis,
             ),
           ),

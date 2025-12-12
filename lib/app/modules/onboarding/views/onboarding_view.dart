@@ -52,7 +52,7 @@ class OnboardingView extends GetView<OnboardingController> {
                 context,
                 text: 'Login as Field Agent',
                 icon: Icons.person_pin_circle,
-                color: AppColors.primaryColor,
+                color: AppColors.btnBgColor,
                 onPressed:(){
                   Get.toNamed(Routes.LOGIN);
                 }
@@ -64,7 +64,7 @@ class OnboardingView extends GetView<OnboardingController> {
                 context,
                 text: 'Login as Admin',
                 icon: Icons.security,
-                  color: AppColors.primaryColor,
+                  color: AppColors.btnBgColor,
                 onPressed: (){
                   Get.toNamed(Routes.DASHBOARD_LOGIN);
                 }

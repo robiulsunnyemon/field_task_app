@@ -184,7 +184,7 @@ class CreateTaskView extends StatelessWidget {
                     ? null
                     : controller.createTask,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.btnBgColor,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),

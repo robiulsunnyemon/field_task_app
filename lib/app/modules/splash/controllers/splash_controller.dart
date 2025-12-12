@@ -8,11 +8,15 @@ class SplashController extends GetxController {
   @override
   void onInit() {
 
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 2), () {
       final token = _box.read('authToken');
+      final isDashboard = _box.read('isDashboard');
       if(token!=null){
         Get.offNamed(Routes.HOME);
-      }else{
+      }else if(isDashboard=="true"){
+        Get.offNamed(Routes.DASHBOARD);
+      }
+      else{
         Get.offNamed(Routes.ONBOARDING);
       }
     });

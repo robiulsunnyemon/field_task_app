@@ -59,7 +59,7 @@ class ResetPasswordVerificationView
                 child: ElevatedButton(
                   onPressed: controller.verifyOtp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.btnBgColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),

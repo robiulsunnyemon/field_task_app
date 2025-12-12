@@ -87,7 +87,7 @@ class SignupView extends GetView<SignupController> {
                         child: ElevatedButton(
                           onPressed: controller.isLoading.value ? null : () => _validateAndSignup(),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryColor,
+                            backgroundColor: AppColors.btnBgColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),

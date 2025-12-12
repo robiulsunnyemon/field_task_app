@@ -1,4 +1,5 @@
 
+import 'package:field_task_app/app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,9 @@ class LocationPickerScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pick Task Location'),
-        backgroundColor: Colors.blue.shade700,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
+        centerTitle: true,
       ),
       body: Stack(
         children: [

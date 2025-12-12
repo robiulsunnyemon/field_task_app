@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../../../data/models/task_model.dart';
 import '../../../data/models/user_model.dart';
+import '../../dashboard/controllers/dashboard_controller.dart';
 import '../../home/controllers/home_controller.dart';
 
 class CreateTaskController extends GetxController {
@@ -26,6 +27,8 @@ class CreateTaskController extends GetxController {
   final RxList<User> agentsList = <User>[].obs;
   final RxList<TaskModel> parentTasksList = <TaskModel>[].obs;
   final GetStorage _box = GetStorage();
+
+
 
   @override
   void onInit() {
@@ -181,7 +184,10 @@ class CreateTaskController extends GetxController {
           "Success",
           "Task created successfully!",
           backgroundColor: Colors.green,
+          colorText: Colors.white
         );
+
+
 
         titleController.clear();
         selectedAgentId.value = '';
@@ -192,6 +198,9 @@ class CreateTaskController extends GetxController {
 
         if (Get.isRegistered<HomeController>()) {
           Get.find<HomeController>().fetchMyTasks();
+        }
+        if (Get.isRegistered<DashboardController>()) {
+          Get.find<DashboardController>().fetchAllTasks();
         }
       } else {
         final data = jsonDecode(response.body);

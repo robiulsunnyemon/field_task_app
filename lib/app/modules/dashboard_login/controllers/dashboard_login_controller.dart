@@ -2,6 +2,7 @@ import 'package:field_task_app/app/core/utils/app_colors.dart';
 import 'package:field_task_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class DashboardLoginController extends GetxController {
 
@@ -15,8 +16,8 @@ class DashboardLoginController extends GetxController {
   final String correctEmail = "robiulsunyemon@gmail.com";
   final String correctPassword = "123456";
 
-  void login() {
-    print("called");
+  Future<void> login() async {
+
     final email = emailController.text.trim();
     final password = passwordController.text;
 
@@ -28,6 +29,9 @@ class DashboardLoginController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+
+      final box = GetStorage();
+      await box.write("isDashboard", "true");
 
 
       Get.offAllNamed(Routes.DASHBOARD);

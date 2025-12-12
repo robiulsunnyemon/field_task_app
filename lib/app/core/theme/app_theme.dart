@@ -6,6 +6,9 @@ import '../utils/app_colors.dart';
 class AppTheme {
   static ThemeData lightTheme=ThemeData(
     scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarThemeData(
+      centerTitle: true
+    ),
     inputDecorationTheme: InputDecorationThemeData(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
       focusedBorder: OutlineInputBorder(

@@ -81,7 +81,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                           child: ElevatedButton(
                             onPressed: controller.isLoading.value ? null : controller.sendOtpRequest,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor,
+                              backgroundColor: AppColors.btnBgColor,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                               elevation: 5,
                             ),

@@ -99,7 +99,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                       child: ElevatedButton(
                         onPressed: controller.isLoading.value ? null : controller.resetPassword,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
+                          backgroundColor: AppColors.btnBgColor,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                           elevation: 5,
                         ),

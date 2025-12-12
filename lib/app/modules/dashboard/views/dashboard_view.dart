@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../routes/app_pages.dart';
 import '../../create_task/views/create_task_view.dart';
 import '../controllers/dashboard_controller.dart';
@@ -47,7 +48,19 @@ class DashboardView extends GetView<DashboardController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.offAllNamed(Routes.LOGIN);
+          Get.defaultDialog(
+            title: "Logout",
+            middleText: "Are you sure to log out?",
+            textConfirm: "Yes",
+            textCancel: "No",
+            confirmTextColor: Colors.white,
+            onConfirm: () {
+              Get.back();
+              final box=GetStorage();
+              box.remove("isDashboard");
+              Get.offAllNamed(Routes.ONBOARDING);
+            },
+          );
         },
         backgroundColor: AppColors.secondaryColor,
         child: const Icon(Icons.swap_horiz,color: Colors.white,),
