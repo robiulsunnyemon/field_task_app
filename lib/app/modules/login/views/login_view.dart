@@ -16,7 +16,6 @@ class LoginView extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-
               Text(
                 'Welcome Back',
                 style: TextStyle(
@@ -35,7 +34,6 @@ class LoginView extends GetView<LoginController> {
               ),
               const SizedBox(height: 50),
 
-
               Card(
                 elevation: 10,
                 shape: RoundedRectangleBorder(
@@ -47,7 +45,37 @@ class LoginView extends GetView<LoginController> {
                     key: controller.formKey,
                     child: Column(
                       children: <Widget>[
-
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryColor.withValues(alpha: .07),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: AppColors.primaryColor),
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Client Credentials (Demo)",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                              Divider(),
+                              Text(
+                                "Email: robiulsunyemon@gmail.com",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              Text(
+                                "Password: 123456",
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 30,),
                         _buildInputField(
                           controller: controller.emailController,
                           label: 'Email Address',
@@ -60,7 +88,6 @@ class LoginView extends GetView<LoginController> {
                           },
                         ),
                         const SizedBox(height: 20),
-
 
                         _buildInputField(
                           controller: controller.passwordController,
@@ -79,7 +106,6 @@ class LoginView extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 10),
 
-
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -94,12 +120,11 @@ class LoginView extends GetView<LoginController> {
                         ),
                         const SizedBox(height: 30),
 
-
                         SizedBox(
                           width: double.infinity,
                           height: 55,
                           child: ElevatedButton(
-                            onPressed: (){
+                            onPressed: () {
                               controller.handleLogin();
                             },
                             style: ElevatedButton.styleFrom(
@@ -126,11 +151,13 @@ class LoginView extends GetView<LoginController> {
               ),
               const SizedBox(height: 40),
 
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account? ", style: TextStyle(color: AppColors.textColor)),
+                  const Text(
+                    "Don't have an account? ",
+                    style: TextStyle(color: AppColors.textColor),
+                  ),
                   GestureDetector(
                     onTap: () {
                       Get.toNamed(Routes.SIGNUP);
@@ -152,7 +179,6 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
-
   Widget _buildInputField({
     required TextEditingController controller,
     required String label,
@@ -167,28 +193,15 @@ class LoginView extends GetView<LoginController> {
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon, color: AppColors.primaryColor),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(color: AppColors.primaryColor.withValues(alpha: 0.5)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(color: AppColors.accentColor, width: 2.0),
-        ),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 15.0,
+          horizontal: 20.0,
+        ),
       ),
       style: const TextStyle(color: AppColors.textColor),
       cursorColor: AppColors.primaryColor,
     );
   }
 }
-
-
-
-

@@ -23,7 +23,7 @@ class SplashView extends GetView<SplashController> {
 
 
             Text(
-              'Welcome to Flutter App',
+              'Welcome to Field Task App',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,

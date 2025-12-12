@@ -40,7 +40,7 @@ class OtpVerifyView extends GetView<OtpVerifyController> {
                 'Please enter the 6-digit code sent to your email/phone.',
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.textColor.withOpacity(0.6),
+                  color: AppColors.textColor.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -87,7 +87,7 @@ class OtpVerifyView extends GetView<OtpVerifyController> {
                         : "Resend code in ${controller.timerSeconds.value}s",
                     style: TextStyle(
                       fontSize: 16,
-                      color: controller.canResend.value ? AppColors.textColor : AppColors.textColor.withOpacity(0.7),
+                      color: controller.canResend.value ? AppColors.textColor : AppColors.textColor.withValues(alpha: 0.7),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -126,7 +126,7 @@ class OtpVerifyView extends GetView<OtpVerifyController> {
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: AppColors.primaryColor.withOpacity(0.5)),
+            borderSide: BorderSide(color: AppColors.primaryColor.withValues(alpha: 0.5)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

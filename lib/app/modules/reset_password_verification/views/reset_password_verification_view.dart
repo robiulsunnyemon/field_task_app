@@ -17,6 +17,7 @@ class ResetPasswordVerificationView
         backgroundColor: AppColors.primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(

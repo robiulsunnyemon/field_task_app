@@ -14,6 +14,8 @@ class FieldTask extends StatelessWidget {
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
+      defaultTransition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
     );
   }
 }

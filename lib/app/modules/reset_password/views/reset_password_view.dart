@@ -19,6 +19,7 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
         backgroundColor: AppColors.primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -58,8 +59,6 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                           ),
                           onPressed: controller.toggleNewPasswordVisibility,
                         ),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: AppColors.accentColor, width: 2.0)),
                       ),
                       validator: (value) {
                         if (value == null || value.length < 6) {
@@ -84,8 +83,6 @@ class ResetPasswordView extends GetView<ResetPasswordController> {
                           ),
                           onPressed: controller.toggleConfirmPasswordVisibility,
                         ),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: AppColors.accentColor, width: 2.0)),
                       ),
                       validator: (value) {
                         if (value != controller.newPasswordController.text) {

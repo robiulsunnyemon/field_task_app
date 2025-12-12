@@ -8,7 +8,7 @@ import '../../../routes/app_pages.dart';
 
 class ForgetPasswordController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController(text: "robiulsunyemon@gmail.com");
+  final TextEditingController emailController = TextEditingController();
   final isLoading = false.obs;
 
 
@@ -52,7 +52,7 @@ class ForgetPasswordController extends GetxController {
         Get.snackbar("Success", "Verification code sent to $email",
             backgroundColor: Colors.green, colorText: Colors.white);
 
-        Get.toNamed(Routes.RESET_PASSWORD_VERIFICATION, arguments: email);
+        Get.offAllNamed(Routes.RESET_PASSWORD_VERIFICATION, arguments: email);
 
       } else {
         final data = jsonDecode(response.body);

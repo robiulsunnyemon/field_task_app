@@ -55,7 +55,7 @@ class AuthRepository {
 
 
     } on ApiException {
-      /// Already a known API error — rethrow
+
       rethrow;
 
     } on http.ClientException catch (_) {

@@ -10,10 +10,10 @@ import '../../../core/exception/api_exception.dart';
 
 class SignupController extends GetxController {
 
-  final TextEditingController nameController = TextEditingController(text: "robiul");
-  final TextEditingController emailController = TextEditingController(text: "robiulsunyemon@gmail.com");
-  final TextEditingController passwordController = TextEditingController(text: "123456");
-  final TextEditingController confirmPasswordController = TextEditingController(text: "123456");
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final isLoading = false.obs;
 
@@ -28,7 +28,7 @@ class SignupController extends GetxController {
 
   Future<void> signup() async {
     isLoading.value = true;
-    final url = Uri.parse("${AppConstants.baseUrl}/api/v1/auth/");
+    final url = Uri.parse("${AppConstants.baseUrl}/api/v1/auth/signup");
     final data={
       "first_name":nameController.text.trim(),
       "last_name": "null",
@@ -67,7 +67,7 @@ class SignupController extends GetxController {
         colorText: Colors.white,
       );
 
-      Get.toNamed(Routes.OTP_VERIFY,arguments: emailController.text.trim());
+      Get.offAllNamed(Routes.OTP_VERIFY,arguments: emailController.text.trim());
 
 
     } on ApiException {

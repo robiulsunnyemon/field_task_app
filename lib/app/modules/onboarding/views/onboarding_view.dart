@@ -1,10 +1,7 @@
 import 'package:field_task_app/app/core/utils/app_colors.dart';
 import 'package:field_task_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-
 import '../controllers/onboarding_controller.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
@@ -68,7 +65,9 @@ class OnboardingView extends GetView<OnboardingController> {
                 text: 'Login as Admin',
                 icon: Icons.security,
                   color: AppColors.primaryColor,
-                onPressed: (){}
+                onPressed: (){
+                  Get.toNamed(Routes.DASHBOARD_LOGIN);
+                }
               ),
 
             ],

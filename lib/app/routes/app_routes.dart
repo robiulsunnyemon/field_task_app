@@ -13,6 +13,7 @@ abstract class Routes {
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
   static const RESET_PASSWORD_VERIFICATION = _Paths.RESET_PASSWORD_VERIFICATION;
   static const CREATE_TASK = _Paths.CREATE_TASK;
+  static const DASHBOARD_LOGIN = _Paths.DASHBOARD_LOGIN;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const FORGET_PASSWORD = '/forget-password';
   static const RESET_PASSWORD_VERIFICATION = '/reset-password-verification';
   static const CREATE_TASK = '/create-task';
+  static const DASHBOARD_LOGIN = '/dashboard-login';
 }

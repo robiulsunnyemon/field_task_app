@@ -85,7 +85,7 @@ class TaskService extends GetxService {
     if (offlineTasks.isEmpty) return;
 
     isSyncing.value = true;
-    Get.snackbar("Syncing", "${offlineTasks.length} pending actions...", duration: const Duration(seconds: 5), backgroundColor: Colors.blue);
+
 
     List<dynamic> failedQueue = [];
 
@@ -112,7 +112,7 @@ class TaskService extends GetxService {
     isSyncing.value = false;
 
     if (failedQueue.isEmpty && offlineTasks.isNotEmpty) {
-      Get.snackbar("Sync Complete", "All actions synced successfully!", backgroundColor: Colors.green);
+      Get.snackbar("Sync Complete", "All actions synced successfully!", backgroundColor: Colors.green,colorText: Colors.white);
 
       if (Get.isRegistered<HomeController>()) {
         Get.find<HomeController>().fetchMyTasks();

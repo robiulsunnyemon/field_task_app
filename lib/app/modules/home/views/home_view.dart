@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,21 +17,25 @@ class HomeView extends GetView<HomeController> {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
+        surfaceTintColor:  AppColors.primaryColor,
+        backgroundColor:  AppColors.primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
 
-        title: Obx(() => Text(
-          'Welcome, ${controller.userName.value}',
-          style: const TextStyle(color: Colors.white, fontSize: 18),
-        )),
+        title: Obx(() {
+          final firstName = controller.currentUser.value?.firstName ?? 'Agent';
+          return Text(
+            'Welcome, $firstName',
+            style: const TextStyle(color: Colors.white, fontSize: 18,fontWeight: FontWeight.bold),
+          );
+        }),
         centerTitle: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: controller.fetchMyTasks,
+            onPressed: controller.fetchUserInfoAndTasks,
             tooltip: 'Refresh Tasks',
           ),
           IconButton(
@@ -47,7 +50,7 @@ class HomeView extends GetView<HomeController> {
                 onConfirm: () {
                   Get.back();
                   GetStorage().remove('authToken');
-                  GetStorage().remove('currentUser');
+                  GetStorage().remove('currentUserData');
                   Get.offAllNamed(Routes.LOGIN);
                 },
               );
@@ -56,57 +59,151 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      body: Obx(() {
-        if (controller.isLoading.value && controller.tasks.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
-        }
+      body: Column(
+        children: [
 
-        if (controller.error.isNotEmpty && controller.tasks.isEmpty) {
-          return Center(
-            child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.signal_cellular_off, color: Colors.grey, size: 50),
-                    const SizedBox(height: 10),
-                    Text(
-                      controller.error.value,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.grey, fontSize: 16),
-                    ),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: controller.fetchMyTasks,
-                      child: const Text('Try Refresh'),
-                    )
-                  ],
-                )
-            ),
-          );
-        }
+          _buildTaskSummary(),
 
-        if (controller.tasks.isEmpty) {
-          return const Center(
-            child: Text(
-              'No tasks assigned to you yet.',
-              style: TextStyle(fontSize: 18, color: Colors.grey),
-            ),
-          );
-        }
 
-        return RefreshIndicator(
-          onRefresh: controller.fetchMyTasks,
-          child: ListView.builder(
-            padding: const EdgeInsets.all(10),
-            itemCount: controller.tasks.length,
-            itemBuilder: (context, index) {
-              final task = controller.tasks[index];
-              return _buildTaskCard(task);
-            },
+          Expanded(
+            child: Obx(() {
+              if (controller.isLoading.value && controller.tasks.isEmpty) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (controller.error.isNotEmpty && controller.tasks.isEmpty) {
+                return Center(
+                  child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.signal_cellular_off, color: Colors.grey, size: 50),
+                          const SizedBox(height: 10),
+                          Text(
+                            controller.error.value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.grey, fontSize: 16),
+                          ),
+                          const SizedBox(height: 10),
+                          ElevatedButton(
+                            onPressed: controller.fetchMyTasks,
+                            child: const Text('Try Refresh'),
+                          )
+                        ],
+                      )
+                  ),
+                );
+              }
+
+              if (controller.tasks.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'No tasks assigned to you yet.',
+                    style: TextStyle(fontSize: 18, color: Colors.grey),
+                  ),
+                );
+              }
+
+              return RefreshIndicator(
+                onRefresh: controller.fetchMyTasks,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(10),
+                  itemCount: controller.tasks.length,
+                  itemBuilder: (context, index) {
+                    final task = controller.tasks[index];
+                    return _buildTaskCard(task);
+                  },
+                ),
+              );
+            }),
           ),
-        );
-      }),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.DASHBOARD_LOGIN);
+        },
+        backgroundColor: AppColors.secondaryColor,
+        child: const Icon(Icons.swap_horiz,color: Colors.white,),
+      ),
+    );
+  }
+
+
+  Widget _buildTaskSummary() {
+    return Obx(() => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+            colors: [
+
+              AppColors.primaryColor,
+              AppColors.secondaryColor,
+
+
+            ]
+        ),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(12),bottomRight:Radius.circular(12) ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildSummaryItem(
+              'Pending',
+              controller.pendingTasksCount,
+              Colors.orange.shade600,
+              Icons.access_time_filled
+          ),
+          _buildSummaryItem(
+              'In Progress',
+              controller.inProgressTasksCount,
+              Colors.blue.shade600,
+              Icons.auto_stories
+          ),
+          _buildSummaryItem(
+              'Completed',
+              controller.completedTasksCount,
+              Colors.green.shade600,
+              Icons.check_circle_rounded
+          ),
+        ],
+      ),
+    ));
+  }
+
+
+  Widget _buildSummaryItem(String title, int count, Color color, IconData icon) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            radius: 25,
+            backgroundColor: Colors.white,
+            child: Icon(icon, color: color, size: 30),
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          '$count',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 
@@ -118,9 +215,6 @@ class HomeView extends GetView<HomeController> {
 
     String statusText = status.capitalizeFirst ?? 'Unknown';
 
-    final RxBool withinRange = controller.isWithinRange(task.id);
-
-
     switch (status) {
       case 'pending':
         statusColor = Colors.orange.shade600;
@@ -130,7 +224,7 @@ class HomeView extends GetView<HomeController> {
       case 'completed':
         statusColor = Colors.green.shade600;
         break;
-      case 'in_progress':
+      case 'inprogress':
         statusColor = Colors.blue.shade600;
         break;
       default:
@@ -139,6 +233,7 @@ class HomeView extends GetView<HomeController> {
 
     return Card(
       elevation: 4,
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
@@ -177,7 +272,8 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
             const Divider(height: 20),
-            _buildDetailRow(Icons.pin_drop, 'Location:', 'Lat: ${task.lati.substring(0, 8)}... | Long: ${task.longi.substring(0, 8)}...'),
+            _buildDetailRow(Icons.pin_drop, 'Location:', 'Lat: ${task.lati.substring(0, 8)}...'),
+            _buildDetailRow(Icons.pin_drop, 'Location:', 'Long: ${task.longi.substring(0, 8)}...'),
             _buildDetailRow(Icons.calendar_today, 'Created:', '${task.createdAt.day}-${task.createdAt.month}-${task.createdAt.year}'),
             const SizedBox(height: 10),
 
@@ -186,12 +282,15 @@ class HomeView extends GetView<HomeController> {
               alignment: Alignment.centerRight,
               child: Obx(() {
 
+                final bool isWithinRange = controller.isWithinRange(task.id);
+
 
                 final isTaskCompleted = status == 'completed' || status == 'complete';
                 final isTaskInProgress = status == 'inprogress';
                 final isTaskPending = status == 'pending';
                 final isLocallyCheckedIn = controller.checkInStatus[task.id] ?? false;
-                final isWithinRange = withinRange.value;
+
+                final isCurrentTaskInProgress = isTaskInProgress || isLocallyCheckedIn;
 
 
                 print('--- UI DEBUG for Task name:${task.title} id: ${task.id} ---');
@@ -209,7 +308,7 @@ class HomeView extends GetView<HomeController> {
                 }
 
 
-                if ((isTaskInProgress || isLocallyCheckedIn) && isWithinRange) {
+                if (isCurrentTaskInProgress && isWithinRange) {
                   print('UI: Showing COMPLETE TASK button.');
                   return ElevatedButton.icon(
                     onPressed: controller.isLoading.value ? null : () => controller.handleCompletion(task),
@@ -241,18 +340,11 @@ class HomeView extends GetView<HomeController> {
 
                 print('UI: Showing VIEW ON MAP button (Outside Range or Other).');
                 return ElevatedButton.icon(
-                  onPressed: () {
-                    Get.snackbar(
-                      "Navigation",
-                      "Opening map to task location (${task.lati}, ${task.longi})",
-                      backgroundColor: Colors.yellow.shade800,
-                      colorText: Colors.white,
-                    );
-                  },
+                  onPressed: () => controller.navigateToTaskLocation(task),
                   icon: const Icon(Icons.location_on, size: 18),
                   label: const Text('VIEW ON MAP'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.accentColor,
+                    backgroundColor: const Color(0xffB33771),
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   ),
@@ -271,7 +363,7 @@ class HomeView extends GetView<HomeController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 16, color: AppColors.textColor.withValues(alpha: 0.7)),
+          Icon(icon, size: 16, color: AppColors.textColor.withOpacity(0.7)),
           const SizedBox(width: 8),
           Text(
             label,
@@ -281,7 +373,7 @@ class HomeView extends GetView<HomeController> {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: AppColors.textColor.withValues(alpha: 0.8)),
+              style: TextStyle(color: AppColors.textColor.withOpacity(0.8)),
               overflow: TextOverflow.ellipsis,
             ),
           ),

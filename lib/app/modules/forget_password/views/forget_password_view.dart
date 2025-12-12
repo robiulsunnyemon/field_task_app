@@ -18,6 +18,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
         backgroundColor: AppColors.primaryColor,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -40,7 +41,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                 'Enter your email address to receive a verification code.',
                 style: TextStyle(
                   fontSize: 16,
-                  color: AppColors.textColor.withOpacity(0.6),
+                  color: AppColors.textColor.withValues(alpha: 0.6),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -63,8 +64,6 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                           decoration: InputDecoration(
                             labelText: 'Email Address',
                             prefixIcon: Icon(Icons.email, color: AppColors.primaryColor),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: AppColors.accentColor, width: 2.0)),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty || !value.contains('@')) {

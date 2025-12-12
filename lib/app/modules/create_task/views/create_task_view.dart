@@ -1,3 +1,4 @@
+import 'package:field_task_app/app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/widget/location_picker.dart';
@@ -13,8 +14,9 @@ class CreateTaskView extends GetView<CreateTaskController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create New Task'),
-        backgroundColor: Colors.blue.shade700,
+        backgroundColor: AppColors.primaryColor,
         foregroundColor: Colors.white,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -44,6 +46,7 @@ class CreateTaskView extends GetView<CreateTaskController> {
                     ? null
                     : controller.selectedAgentId.value,
                 hint: const Text('Select Agent'),
+                dropdownColor: Colors.white,
                 items: controller.agentsList.map<DropdownMenuItem<String>>((
                   User agent,
                 ) {
@@ -85,11 +88,14 @@ class CreateTaskView extends GetView<CreateTaskController> {
                 decoration: _inputDecoration(
                   label: 'Parent Task (Optional)',
                   icon: Icons.business,
+
                 ),
+                dropdownColor: Colors.white,
                 initialValue: controller.selectedParentTaskId.value.isEmpty
                     ? null
                     : controller.selectedParentTaskId.value,
                 hint: const Text('Select Parent Task (Optional)'),
+
                 items: [
                   const DropdownMenuItem(
                     value: '',
@@ -111,6 +117,29 @@ class CreateTaskView extends GetView<CreateTaskController> {
             const SizedBox(height: 24),
 
 
+
+            ElevatedButton.icon(
+              onPressed: () {
+
+                Get.to(() => LocationPickerScreen());
+              },
+              icon: const Icon(Icons.map, color: AppColors.primaryColor),
+              label: const Text(
+                'Pick Location',
+                style: TextStyle(color: AppColors.primaryColor),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(color: AppColors.primaryColor)
+                ),
+
+              ),
+            ),
+            const SizedBox(height: 24),
+
             const Text(
               'Location Coordinates',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -118,7 +147,7 @@ class CreateTaskView extends GetView<CreateTaskController> {
             const SizedBox(height: 8),
 
             Obx(
-              () => Container(
+                  () => Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade50,
@@ -149,28 +178,9 @@ class CreateTaskView extends GetView<CreateTaskController> {
               ),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 24),
 
-            ElevatedButton.icon(
-              onPressed: () {
 
-                Get.to(() => LocationPickerScreen());
-              },
-              icon: const Icon(Icons.map, color: Colors.white),
-              label: const Text(
-                'Pick Location from Map (OSM)',
-                style: TextStyle(color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 40),
 
 
             Obx(
@@ -179,7 +189,7 @@ class CreateTaskView extends GetView<CreateTaskController> {
                     ? null
                     : controller.createTask,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue.shade700,
+                  backgroundColor: AppColors.primaryColor,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -219,6 +229,10 @@ class CreateTaskView extends GetView<CreateTaskController> {
       labelText: label,
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       prefixIcon: Icon(icon),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: AppColors.primaryColor, width: 2),
+      ),
     );
   }
 }
