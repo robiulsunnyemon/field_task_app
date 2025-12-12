@@ -13,7 +13,7 @@ class OtpVerifyController extends GetxController {
   late List<TextEditingController> otpControllers;
   final isLoading = false.obs;
 
-  RxInt timerSeconds = 20.obs;
+  RxInt timerSeconds = 300.obs;
   RxBool canResend = false.obs;
   late Timer _timer;
 
