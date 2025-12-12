@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
-import '../../../data/models/task_model.dart';
+import '../../../data/models/task.dart';
 
 
 class HomeView extends GetView<HomeController> {

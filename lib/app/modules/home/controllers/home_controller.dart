@@ -10,7 +10,7 @@
 // import '../../../core/exception/api_exception.dart';
 // import '../../../core/services/location_service.dart';
 // import '../../../core/services/task_service.dart';
-// import '../../../data/models/task_model.dart';
+// import '../../../data/models/task.dart';
 // import '../../../routes/app_pages.dart';
 //
 // class HomeController extends GetxController {
@@ -220,7 +220,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../../core/exception/api_exception.dart';
 import '../../../core/services/location_service.dart';
 import '../../../core/services/task_service.dart';
-import '../../../data/models/task_model.dart';
+import '../../../data/models/task.dart';
 import '../../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
