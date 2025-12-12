@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/create_task/bindings/create_task_binding.dart';
+import '../modules/create_task/views/create_task_view.dart';
 import '../modules/forget_password/bindings/forget_password_binding.dart';
 import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -24,7 +26,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.CREATE_TASK;
 
   static final routes = [
     GetPage(
@@ -71,6 +73,11 @@ class AppPages {
       name: _Paths.RESET_PASSWORD_VERIFICATION,
       page: () => const ResetPasswordVerificationView(),
       binding: ResetPasswordVerificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_TASK,
+      page: () => const CreateTaskView(),
+      binding: CreateTaskBinding(),
     ),
   ];
 }
